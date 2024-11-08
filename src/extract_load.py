@@ -13,6 +13,10 @@ DB_USER = os.getenv('DB_USER_PROD')
 DB_PASS = os.getenv('DB_PASS_PROD')
 DB_SCHEMA = os.getenv('DB_SCHEMA_PROD')
 
+DATABASE_URL = f"posrgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+
+engine = create_engine(DATABASE_URL)
+
 def buscar_dados_commodities(simbolo, periodo='5d', intervalo='1d'):
     ticker = yf.Ticker('CL=F')
     dados = ticker.history(period=periodo, interval=intervalo)[['Close']]
